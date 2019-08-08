@@ -1,0 +1,10 @@
+overwrite: true
+generates:
+  examples/Graphql_Codegen.re:
+    # ensure the demo app is running before running codegen
+    schema: http://localhost:4000
+    config:
+      scalars:
+        "DateTime": "string"
+    plugins:
+      - reason-client
