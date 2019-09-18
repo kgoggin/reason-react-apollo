@@ -105,6 +105,8 @@ type queryResultJs('data, 'variables) = {
   "variables": 'variables,
   "networkStatus": networkStatus,
   "refetch": 'variables => Js.Promise.t(apolloQueryResultJs('data)),
+  "startPolling": int => unit,
+  "stopPolling": unit => unit,
 };
 
 type mutationFunctionOptions('data, 'variables) = {

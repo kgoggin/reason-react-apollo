@@ -56,6 +56,8 @@ module Make = (Config: ProjectConfig) => {
     error: option(apolloError),
     variables: 'variables,
     networkStatus,
+    startPolling: int => unit,
+    stopPolling: unit => unit,
   };
 
   type executionResult = {
@@ -147,6 +149,8 @@ module Make = (Config: ProjectConfig) => {
           ->Belt.Option.map(mapApolloError),
         variables: response##variables,
         networkStatus: response##networkStatus,
+        startPolling: response##startPolling,
+        stopPolling: response##stopPolling,
       };
     };
 
@@ -215,6 +219,8 @@ module Make = (Config: ProjectConfig) => {
             ->Belt.Option.map(mapApolloError),
           variables: response##variables,
           networkStatus: response##networkStatus,
+          startPolling: response##startPolling,
+          stopPolling: response##stopPolling,
         },
       );
     };
