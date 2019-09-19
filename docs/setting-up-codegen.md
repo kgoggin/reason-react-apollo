@@ -1,6 +1,6 @@
 ---
-id: setting-up
-title: Setting Your Project Up
+id: setting-up-codegen
+title: Setting Up Your Project for Codegen
 ---
 
 > The code generation portion of the project is a plugin for [GraphQL Code Generator](https://graphql-code-generator.com/). This page will walk you through the basics, but for more advanced options please see their documentation.
@@ -31,7 +31,7 @@ generates:
       - reason-client
   path/to/operations/typedefs/Apollo.re:
     config:
-      filterInputTypes: false
+      filterInputTypes: true
       graphqlTypesModuleName: Graphql
       graphQLErrorTypeName: GraphQLError.t
       scalars:

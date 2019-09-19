@@ -161,29 +161,11 @@ external useMutation:
   ) =
   "useMutation";
 
-type linkOptions;
-[@bs.obj] external linkOptions: (~uri: string) => linkOptions = "";
+type boostOptions;
+[@bs.obj] external boostOptions: (~uri: string=?, unit) => boostOptions = "";
 
-type clientOptions;
-[@bs.obj]
-external clientOptions:
-  (
-    ~link: apolloLink,
-    ~cache: apolloCache,
-    ~ssrMode: bool=?,
-    ~ssrForceFetchDelay: int=?,
-    ~connectToDevTools: bool=?,
-    ~queryDeduplication: bool=?,
-    unit
-  ) =>
-  clientOptions =
-  "";
-
-[@bs.module "apollo-link-http"] [@bs.new]
-external createHttpLink: linkOptions => apolloLink = "HttpLink";
-
-[@bs.module "apollo-client"] [@bs.new]
-external createApolloClient: clientOptions => apolloClient = "ApolloClient";
+[@bs.module "apollo-boost"] [@bs.new]
+external createApolloClient: boostOptions => apolloClient = "ApolloClient";
 
 module ApolloProvider = {
   [@bs.module "@apollo/react-hooks"] [@react.component]
