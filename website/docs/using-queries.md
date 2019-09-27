@@ -3,7 +3,7 @@ id: using-queries
 title: Working With Queries
 ---
 
-> The following assumes you have configured your project to use codegen as descrived in [Configuring Codegen](setting-up.md);
+> The following assumes you have configured your project to use codegen as descrived in [Configuring Codegen](setting-up-codegen.md);
 
 ## Generated Query Modules
 
@@ -51,20 +51,26 @@ module MyCoolQuery = {
 };
 ```
 
-**`type variables`**
+### `type variables`
+
 This is the type for the variables defined in the operation, expressed as a `Js.t`
 
-**`parse`**
+### `parse`
+
 This is a function that takes `variables` and transforms it into JSON (which, behind the scenes, is an identity function).
 
-**`query`**
+### `query`
+
 The query variable is the result of running the operation definition through the `gql` tag. It's compiled down to a plain JS object that's ready to be passed directly to Apollo with no further runtime work! In most cases you won't need to access this, but it can be handy if you want to work directly with the query.
 
-**`useQuery`**
+### `useQuery`
+
 This function is a ReasonML binding for Apollo's useQuery hook, and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly). Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version.
 
-**`useLazyQuery`**
+### `useLazyQuery`
+
 This function is a ReasonML binding for Apollo's useLazyQuery hook, and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly.) Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version.
 
-**`makeVariables**
+### `makeVariables`
+
 This is a helper function for generating the variables required for the query. By using this you're able to tap into Reason's functional programming advantages like partial application.

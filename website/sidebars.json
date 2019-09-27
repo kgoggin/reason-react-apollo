@@ -1,5 +1,6 @@
 {
   "docs": {
-    "Getting Started": ["overview", "setting-up", "using-queries"]
+    "Getting Started": ["overview", "setting-up-codegen", "setting-up-apollo"],
+    "API": ["working-with-the-types", "using-queries"]
   }
 }

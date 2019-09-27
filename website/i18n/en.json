@@ -3,24 +3,31 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A website for testing",
+    "tagline": "Codgen + Bindings for Working With Apollo in ReasonML",
     "docs": {
-      "setting-up": {
-        "title": "Configuring Codegen",
-        "sidebar_label": "Configuring Codegen"
+      "setting-up-apollo": {
+        "title": "Creating an Apollo Client"
+      },
+      "setting-up-codegen": {
+        "title": "Setting Up Your Project for Codegen"
       },
       "using-queries": {
         "title": "Working With Queries"
       },
       "overview": {
         "title": "Overview"
+      },
+      "working-with-the-types": {
+        "title": "Using the Generated Types for Your Schema"
       }
     },
     "links": {
-      "Getting Started": "Getting Started"
+      "Getting Started": "Getting Started",
+      "Github": "Github"
     },
     "categories": {
-      "Getting Started": "Getting Started"
+      "Getting Started": "Getting Started",
+      "API": "API"
     }
   },
   "pages-strings": {

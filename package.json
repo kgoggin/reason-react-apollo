@@ -7,10 +7,12 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
-    "packages/*",
-    "website"
+    "packages/*"
   ],
   "dependencies": {
     "lerna": "^3.16.4"
+  },
+  "scripts": {
+    "build": "cd webside && yarn build"
   }
 }

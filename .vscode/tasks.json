@@ -31,6 +31,19 @@
       "path": "packages/reason-react-apollo/",
       "group": "build",
       "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "start",
+      "path": "website/",
+      "problemMatcher": []
+    },
+    {
+      "type": "npm",
+      "script": "build",
+      "path": "website/",
+      "group": "build",
+      "problemMatcher": []
     }
   ]
 }
