@@ -9,5 +9,11 @@
         "distDir": "build"
       }
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/website/reason-react-apollo/$1"
+    }
   ]
 }
