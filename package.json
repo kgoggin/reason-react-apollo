@@ -11,8 +11,5 @@
   ],
   "dependencies": {
     "lerna": "^3.16.4"
-  },
-  "scripts": {
-    "build": "cd webside && yarn build"
   }
 }
