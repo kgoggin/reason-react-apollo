@@ -1,0 +1,78 @@
+scalar DateTime
+
+enum POST_STATUS {
+  DRAFT
+  PENDING_REVIEW
+  PUBLISHED
+}
+
+type PostMeta {
+  published: String!
+}
+
+type Post {
+  content: String!
+  title: String
+  status: POST_STATUS!
+  statuses: [POST_STATUS!]!
+  nullableStatus: POST_STATUS
+  author: Author!
+  meta: PostMeta
+  type: String
+}
+
+type Author {
+  firstName: String!
+  lastName: String
+  age: Int!
+  posts: [Post!]!
+  postMetas: [PostMeta!]
+  nullablePosts: [Post]!
+  numPosts: Int
+  height: Float!
+  weight: Float
+  isActive: Boolean!
+  hasLoggedIn: Boolean
+}
+
+input CreateAuthorInput {
+  firstName: String!
+  lastName: String
+}
+
+input AuthorWhereUniqueInput {
+  firstName: String!
+}
+
+input CreateConnectAuthor {
+  connect: AuthorWhereUniqueInput
+  create: CreateAuthorInput
+}
+
+input CreatePostInput {
+  title: String
+  content: String!
+  status: POST_STATUS!
+  maybeStatus: POST_STATUS
+  statuses: [POST_STATUS!]
+  strings: [String!]
+  author: CreateConnectAuthor!
+  postTime: DateTime!
+}
+
+input RandoInput {
+  thisIs: String
+  notUsed: String
+  byAnything: String
+}
+
+type Query {
+  posts(title: String!, status: POST_STATUS): [Post!]!
+  authors: [Author!]!
+}
+
+type Mutation {
+  createPost(title: String!): Post!
+  createFullPost(data: CreatePostInput!): Post!
+  maybeCreatePost(data: CreatePostInput): Post
+}

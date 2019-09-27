@@ -1,0 +1,15 @@
+{
+  "name": "reason-react-apollo",
+  "version": "1.0.0-beta.5",
+  "dependencies": {
+    "@apollo/react-hooks": "^3.0.0",
+    "bs-platform": "^5.0.6",
+    "reason-future": "^2.5.0",
+    "reason-react": "^0.7.0"
+  },
+  "scripts": {
+    "bsb:watch": "bsb -clean-world -make-world -w",
+    "bsb:build": "bsb -clean-world -make-world",
+    "build": "yarn run bsb:build"
+  }
+}

@@ -1,14 +1,18 @@
 {
-  "name": "reason-react-apollo",
-  "version": "0.1.0-alpha.8",
+  "name": "graphql-codegen-reason",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:kgoggin/graphql-codegen-reason.git",
+  "author": "Kyle Goggin <kyle@kylegoggin.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
-    "@apollo/react-hooks": "^3.0.0",
-    "bs-platform": "^5.0.6",
-    "reason-future": "^2.5.0",
-    "reason-react": "^0.7.0"
+    "lerna": "^3.16.4"
   },
   "scripts": {
-    "bsb:watch": "bsb -clean-world -make-world -w",
-    "bsb:build": "bsb -clean-world -make-world"
+    "build": "cd webside && yarn build"
   }
 }
