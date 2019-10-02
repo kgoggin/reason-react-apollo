@@ -1,6 +1,12 @@
 {
   "docs": {
     "Getting Started": ["overview", "setting-up-codegen", "setting-up-apollo"],
-    "API": ["working-with-the-types", "using-queries"]
+    "Docs": [
+      "working-with-the-types",
+      "using-queries",
+      "using-mutations",
+      "using-errors",
+      "promise-types"
+    ]
   }
 }

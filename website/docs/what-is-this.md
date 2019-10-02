@@ -11,16 +11,20 @@ This project aims to provide a hassle-free way of using Apollo's React library i
 2.  A codegen plugin for generating ReasonML types for your project's GraphQL operations' variables.
 3.  ReasonML bindings for Apollo's react-hooks library that work hand-in-hand with the generated types, allowing you to write type-safe queries and mutations that use Apollo's fantastic tooling under the covers.
 
+## Is it ready for use?
+
+Yes? Yes! Well, probably. All of the bits and pieces of this approach have been dogfooded while building a react-native + web app in ReasonML for [My Well Ministry](https://www.mywell.org/) and it's been working great. That said, it's not been widely tested against they myriad of GraphQL schemas out there, and there are a few lesser-used parts of the Apollo API that aren't fully implemented yet. So, if you bump into something that isn't working for you, please go ahead and [file an issue](https://github.com/kgoggin/reason-react-apollo/issues/new)!
+
 ## How is this different from other Reason + Apollo bindings?
 
-The main difference between this project and most (all?) other approaches to ReasonML bindings for Apollo is that it does _not_ utilize graphql-ppx to generate type code for your operations, opting instead to generate types for your entire schema in one go. You can read more about the difference (and the pros and cons of both approaches) here.
+The main difference between this project and most (all?) other approaches to ReasonML bindings for Apollo is that it does _not_ utilize graphql-ppx to generate type code for your operations, opting instead to generate types for your entire schema in one go. You can read more about the difference (and the pros and cons of both approaches) [in this blog post](https://www.kylegoggin.com/typing-graphql-operations-in-reason).
 
 ## How does it work?
 
 After setting your project up for using the codegen plugins and running it against your schema, you'll wind up with two generated Reason files:
 
-1.  Abstract types that correspond 1:1 with all of the types defined in your GraphQL schema.
-2.  Modules corresponding to each query + mutation in your app that tie in with the Apollo bindings to type the operation variables and pull in the operation's ast document for you.
+1. Abstract types that correspond 1:1 with all of the types defined in your GraphQL schema.
+2. Modules corresponding to each query + mutation in your app that tie in with the Apollo bindings to type the operation variables and pull in the operation's ast document for you.
 
 So, if you've got an operation defined like so:
 

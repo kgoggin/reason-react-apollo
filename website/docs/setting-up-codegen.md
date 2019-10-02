@@ -5,12 +5,12 @@ title: Setting Up Your Project for Codegen
 
 > The code generation portion of the project is a plugin for [GraphQL Code Generator](https://graphql-code-generator.com/). This page will walk you through the basics, but for more advanced options please see their documentation.
 
-## Installing
+## Dependencies
 
 You'll need to install the graphql-codegen CLI, the Reason plugins (included in this library) as well as graphql itself:
 
 ```bash
-$ yarn add graphql @graphql-codegen/cli graphql-codegen-reason-client graphql-codegen-reason-react-apollo reason-react-apollo -D
+$ yarn add graphql @graphql-codegen/cli graphql-codegen-reason-client graphql-codegen-reason-react-apollo -D
 ```
 
 ## Configuration

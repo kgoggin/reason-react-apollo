@@ -5,11 +5,20 @@
     "previous": "Previous",
     "tagline": "Codgen + Bindings for Working With Apollo in ReasonML",
     "docs": {
+      "promise-types": {
+        "title": "Working With Promises"
+      },
       "setting-up-apollo": {
-        "title": "Creating an Apollo Client"
+        "title": "Setting Up Apollo"
       },
       "setting-up-codegen": {
         "title": "Setting Up Your Project for Codegen"
+      },
+      "using-errors": {
+        "title": "Working With Errors"
+      },
+      "using-mutations": {
+        "title": "Working With Mutations"
       },
       "using-queries": {
         "title": "Working With Queries"
@@ -27,7 +36,7 @@
     },
     "categories": {
       "Getting Started": "Getting Started",
-      "API": "API"
+      "Docs": "Docs"
     }
   },
   "pages-strings": {

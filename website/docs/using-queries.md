@@ -53,7 +53,7 @@ module MyCoolQuery = {
 
 ### `type variables`
 
-This is the type for the variables defined in the operation, expressed as a `Js.t`
+This is the type for the variables defined in the operation, expressed as a `Js.t`.
 
 ### `parse`
 
@@ -65,12 +65,30 @@ The query variable is the result of running the operation definition through the
 
 ### `useQuery`
 
-This function is a ReasonML binding for Apollo's useQuery hook, and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly). Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version.
+This function is a ReasonML binding for [Apollo's useQuery hook](https://www.apollographql.com/docs/react/api/react-hooks/#usequery), and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly). Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version (though the argument is still offered, just as it is in the JS version).
 
 ### `useLazyQuery`
 
-This function is a ReasonML binding for Apollo's useLazyQuery hook, and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly.) Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version.
+This function is a ReasonML binding for [Apollo's useLazyQuery hook](https://www.apollographql.com/docs/react/api/react-hooks/#uselazyquery), and accepts all of the same configuration options (though some have been tweaked to make them more Reason-friendly.) Note that since we've already pre-processed the query doecument, you don't need to directly pass it as an argument as you would in the JS version (though the argument is still offered, just as it is in the JS version).
 
 ### `makeVariables`
 
 This is a helper function for generating the variables required for the query. By using this you're able to tap into Reason's functional programming advantages like partial application.
+
+## Query Response
+
+The response object is typed like so:
+
+```reason
+type queryResult('variables) = {
+  data: option(Js.Json.t),
+  loading: bool,
+  error: option(apolloError),
+  variables: 'variables,
+  networkStatus,
+  startPolling: int => unit,
+  stopPolling: unit => unit,
+};
+```
+
+Note that there are a few fields that haven't been added to the bindings yet - feel free to send a PR!

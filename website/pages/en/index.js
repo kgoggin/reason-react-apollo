@@ -45,12 +45,6 @@ class HomeSplash extends React.Component {
       </div>
     );
 
-    const Logo = props => (
-      <div className="projectLogo">
-        <img src={props.img_src} alt="Project Logo" />
-      </div>
-    );
-
     const ProjectTitle = () => (
       <h2 className="projectTitle">
         {siteConfig.title}
@@ -78,7 +72,9 @@ class HomeSplash extends React.Component {
       <SplashContainer>
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
-          <MarkdownBlock>{codeExample}</MarkdownBlock>
+          <div style={{ maxWidth: "500px", margin: "auto" }}>
+            <MarkdownBlock>{codeExample}</MarkdownBlock>
+          </div>
           <PromoSection>
             <Button href={docUrl("overview")}>Get started</Button>
           </PromoSection>
@@ -95,7 +91,7 @@ class Index extends React.Component {
 
     const Block = props => (
       <Container
-        padding={["bottom", "top"]}
+        padding={["bottom"]}
         id={props.id}
         background={props.background}
       >
