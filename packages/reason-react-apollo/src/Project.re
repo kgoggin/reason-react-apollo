@@ -297,6 +297,6 @@ module Make = (Config: ProjectConfig) => {
 };
 
 let createClient = (~uri=?, ()) =>
-  ApolloTypes.reateApolloClient(boostOptions(~uri?, ()));
+  ApolloTypes.createApolloClient(ApolloTypes.boostOptions(~uri?, ()));
 
 module Provider = ApolloTypes.ApolloProvider;
