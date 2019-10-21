@@ -321,7 +321,7 @@ export const writeInputObjectFieldTypes = (fields: IField[]) =>
   fields
     .map(
       field =>
-        `"${sanitizeFieldName(field.name)}": ${getReasonFieldType(field, [
+        `"${field.name}": ${getReasonFieldType(field, [
           [node => node.isEnum, () => 'string'],
           [node => !node.isEnum && !node.scalar, camelCase],
           [node => node.isNullable, transforms.nullable],

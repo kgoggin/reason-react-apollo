@@ -11,6 +11,7 @@ describe("generating input types", () =>
         ~status=`PUBLISHED,
         ~statuses=[|`PUBLISHED|],
         ~postTime="huh",
+        ~type_="type is a reserved word",
         ~author=
           CreateConnectAuthor.make(
             ~create=CreateAuthorInput.make(~firstName="Fred", ()),
@@ -26,6 +27,7 @@ describe("generating input types", () =>
       "statuses": Js.Nullable.return([|"PUBLISHED"|]),
       "strings": Js.Nullable.undefined,
       "postTime": "huh",
+      "type": "type is a reserved word",
       "author": {
         "connect": Js.Nullable.undefined,
         "create":

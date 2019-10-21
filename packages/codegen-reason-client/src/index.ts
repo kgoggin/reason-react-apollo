@@ -19,6 +19,7 @@ import {
   ISchemaData,
   sanitizeFieldName,
   writeInputModule,
+  writeInputObjectFieldTypes,
 } from 'graphql-codegen-reason-base';
 import { head } from './head';
 import { camelCase, upperFirst } from 'lodash';
@@ -88,20 +89,6 @@ const fieldGetter = (node: IField) => {
   }
   return `get${methodName}(${args.join(', ')})`;
 };
-
-const writeInputObjectFieldTypes = (fields: IField[]) =>
-  fields
-    .map(
-      field =>
-        `"${sanitizeFieldName(field.name)}": ${getReasonFieldType(field, [
-          [node => node.isEnum, () => 'string'],
-          [node => !node.isEnum && !node.scalar, camelCase],
-          [node => node.isNullable, transforms.nullable],
-          [node => node.isList, transforms.array],
-          [node => node.isNullableList, transforms.nullable],
-        ])}`
-    )
-    .join(',\n');
 
 const writeObjectField = (node: IField) => {
   return `

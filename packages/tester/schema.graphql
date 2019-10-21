@@ -58,6 +58,7 @@ input CreatePostInput {
   strings: [String!]
   author: CreateConnectAuthor!
   postTime: DateTime!
+  type: String!
 }
 
 input RandoInput {

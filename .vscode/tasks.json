@@ -6,10 +6,13 @@
     {
       "label": "Build All",
       "command": "./node_modules/.bin/lerna",
-      "args": [
-        "run",
-        "build"
-      ],
+      "args": ["run", "build"],
+      "problemMatcher": []
+    },
+    {
+      "label": "Test",
+      "command": "./node_modules/.bin/lerna",
+      "args": ["run", "test"],
       "problemMatcher": []
     },
     {
