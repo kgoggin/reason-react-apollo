@@ -21,7 +21,7 @@ import {
   writeInputModule,
 } from 'graphql-codegen-reason-base';
 import { head } from './head';
-import { camelCase, capitalize } from 'lodash';
+import { camelCase, upperFirst } from 'lodash';
 
 const writeCustomScalars = (config: BaseReasonConfig) => {
   const scalars = config.scalars || {};
@@ -77,7 +77,7 @@ const fieldGetter = (node: IField) => {
     if (isEnum) {
       methodName = 'Enum';
     } else if (scalar) {
-      methodName = capitalize(scalar);
+      methodName = upperFirst(scalar);
     } else {
       methodName = 'Field';
     }
@@ -116,7 +116,7 @@ const writeObjectField = (node: IField) => {
 
 const writeObjectModule = (node: IObjectType) => {
   const fields = node.fieldDetails.map(writeObjectField).join('');
-  return `module ${node.name.value} = {
+  return `module ${upperFirst(node.name.value)} = {
     type t = ${camelCase(node.name.value)};
     let typename = "${node.name.value}";
     ${fields}

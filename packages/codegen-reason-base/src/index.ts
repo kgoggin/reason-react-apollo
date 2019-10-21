@@ -13,7 +13,7 @@ import {
   NonNullTypeNode,
   DefinitionNode,
 } from 'graphql';
-import { uniq, camelCase } from 'lodash';
+import { uniq, camelCase, upperFirst } from 'lodash';
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { printRE, parseRE } from 'reason';
 
@@ -306,7 +306,7 @@ export const writeInputModule = (
 ) => {
   const functorWrapper = (str: string) =>
     functorName ? `${functorName}(${str})` : str;
-  return `module ${moduleName} = ${functorWrapper(`{
+  return `module ${upperFirst(moduleName)} = ${functorWrapper(`{
     type ${typeName} = ${(fieldDetails.length && typeDef) || 'unit'};
     ${makeMakeVariables(fieldDetails, makeFnName)}
     ${additionalContent}

@@ -11,6 +11,10 @@
     {
       "dir": "__tests__",
       "subdirs": true
+    },
+    {
+      "dir": "fixtures",
+      "subdirs": true
     }
   ],
   "package-specs": {
