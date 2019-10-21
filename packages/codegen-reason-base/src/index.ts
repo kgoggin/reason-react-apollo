@@ -271,7 +271,7 @@ export const getReasonInputFieldValue = (node: IField) => {
 };
 
 const writeInputField = (node: IField) => {
-  return `"${sanitizeFieldName(node.name)}": ${getReasonInputFieldValue(node)}`;
+  return `"${node.name}": ${getReasonInputFieldValue(node)}`;
 };
 
 export const writeInputArg = (node: IField) => {
