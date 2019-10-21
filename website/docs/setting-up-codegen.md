@@ -27,6 +27,8 @@ generates:
       scalars:
         "DateTime": "string"
         "Json": "string"
+      rootQueryTypeName: "Query"
+      rootMutationTypeName: "Mutation"
     plugins:
       - reason-client
   path/to/operations/typedefs/Apollo.re:
@@ -64,6 +66,10 @@ Defaults to `false`. If set to `true`, the plugin will only generate types for I
 ### `refmt`
 
 Defaults to `true`. If false, the generator will not run `refmt` on the generated code. This can be helpful when debugging a problem with the code generator.
+
+### `rootQueryTypeName` and `rootMutationTypeName`
+
+Specify the GraphQL type name being used for your schema's root Query and Mutation types. Defaults to "Query" and "Mutation".
 
 ## Operation Type Definitions
 

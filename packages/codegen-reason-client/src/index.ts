@@ -132,9 +132,10 @@ const writeInputType = (node: IInputType) => {
   }`;
 };
 
-const writeObjectType = (node: IObjectType) => {
+const writeObjectType = (config: BaseReasonConfig) => (node: IObjectType) => {
   const querydef =
-    node.name.value === 'Query' || node.name.value === 'Mutation'
+    node.name.value === config.rootQueryTypeName ||
+    node.name.value === config.rootMutationTypeName
       ? ` = Js.Json.t`
       : '';
   return `type ${camelCase(node.name.value)}${querydef};`;
@@ -166,10 +167,10 @@ export const plugin: PluginFunction<BaseReasonConfig> = async (
       '';
 
     return `
-    ${head}
+    ${head(config)}
     ${writeCustomScalars(config)}
     ${enums.map(writeEnumType).join('\n')}
-    ${objects.map(writeObjectType).join('\n')}
+    ${objects.map(writeObjectType(config)).join('\n')}
     ${inputObjectTypeDefs}
     ${objects.map(writeObjectModule).join('\n')}
     ${inputObjects.map(writeInputTypeModule).join('\n')}

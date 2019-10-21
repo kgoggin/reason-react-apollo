@@ -21,12 +21,16 @@ export interface BaseReasonConfig {
   scalars?: { [scalarName: string]: string };
   refmt?: boolean;
   filterInputTypes?: boolean;
+  rootQueryTypeName?: string;
+  rootMutationTypeName?: string;
 }
 
 export const defaultBaseConfig = {
   scalars: {},
   refmt: true,
   filterInputTypes: false,
+  rootQueryTypeName: 'Query',
+  rootMutationTypeName: 'Mutation',
 };
 
 export declare type LoadedFragment<AdditionalFields = {}> = {

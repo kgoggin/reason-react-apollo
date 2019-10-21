@@ -1,4 +1,6 @@
-export const head = `
+import { BaseReasonConfig } from 'graphql-codegen-reason-base';
+
+export const head = (config: BaseReasonConfig) => `
 type field('root, 'base) = 'root => 'base;
 
 type enumMap('enum) = {
@@ -14,7 +16,7 @@ let verifyGraphQLType = (~typename, json) =>
   switch (json->Js.Json.decodeObject) {
   | None => raise(Graphql_Verify({j|Unable to decode $typename object|j}))
   | Some(root) =>
-    typename == "Query" || typename == "Mutation"
+    typename == "${config.rootQueryTypeName}" || typename == "${config.rootMutationTypeName}"
       ? root
       : (
         switch (root->Js.Dict.get("__typename")) {
