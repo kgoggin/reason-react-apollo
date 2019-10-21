@@ -15,7 +15,7 @@ const users = [];
 
 const siteConfig = {
   title: "Reason React Apollo", // Title for your website.
-  tagline: "Codgen + Bindings for Working With Apollo in ReasonML",
+  tagline: "Codegen + Bindings for Working With Apollo in ReasonML",
   url: "https://your-docusaurus-test-site.com", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
