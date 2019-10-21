@@ -1,6 +1,6 @@
 {
   "name": "graphql-codegen-reason-base",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "kgoggin <kyle@kylegoggin.com>",
   "license": "MIT",
   "main": "dist/index.js",
