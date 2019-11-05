@@ -224,6 +224,36 @@ module Make = (Config: ProjectConfig) => {
         },
       );
     };
+
+    let readQuery = (cache: DataProxy.t, ~variables: option(variables)=?, ()) => {
+      cache
+      ->DataProxy.readQuery(
+          DataProxy.readQueryOptions(
+            ~query,
+            ~variables=?variables->Belt.Option.map(QueryConfig.parse),
+            (),
+          ),
+        )
+      ->Js.Nullable.toOption
+      ->Belt.Option.map(Config.parseQuery);
+    };
+
+    let writeQuery =
+        (
+          cache: DataProxy.t,
+          ~data: Config.query,
+          ~variables: option(variables)=?,
+          (),
+        ) => {
+      cache->DataProxy.writeQuery(
+        DataProxy.writeQueryOptions(
+          ~query,
+          ~variables=?variables->Belt.Option.map(QueryConfig.parse),
+          ~data,
+          (),
+        ),
+      );
+    };
   };
 
   module MakeMutation = (MutationConfig: MutationConfig) => {
@@ -233,13 +263,36 @@ module Make = (Config: ProjectConfig) => {
         (
           ~mutation as overrideMutation: option(documentNode)=?,
           ~variables: option(MutationConfig.variables)=?,
+          ~update: option((DataProxy.t, executionResult) => unit)=?,
           (),
         ) => {
+      let updateJs =
+        update->Belt.Option.map(
+          (u, cache: DataProxy.t, res: executionResultJs) =>
+          u(
+            cache,
+            {
+              data:
+                res##data
+                ->Js.Undefined.toOption
+                ->Belt.Option.flatMap(mapEmptyObject)
+                ->Belt.Option.map(Config.parseMutation),
+              errors:
+                res##errors
+                ->Js.Undefined.toOption
+                ->Belt.Option.map(arr =>
+                    arr->Belt.Array.map(mapGraphQLError)
+                  ),
+            },
+          )
+        );
+
       let opt =
         ApolloTypes.mutationHookOptions(
           ~variables=?{
             variables->Belt.Option.map(MutationConfig.parse);
           },
+          ~update=?updateJs,
           (),
         );
       let (mutateJs, responseJs) =

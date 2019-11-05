@@ -3,12 +3,36 @@ type watchQueryFetchPolicy;
 type errorPolicy;
 type apolloClient;
 type apolloLink;
-type apolloCache;
 type context;
 type data = Js.Json.t;
 type networkStatus;
 
 type graphqlError;
+
+module DataProxy = {
+  type t;
+
+  [@bs.deriving abstract]
+  type readQueryOptions = {
+    query: documentNode,
+    [@bs.optional]
+    variables: Js.Json.t,
+  };
+
+  [@bs.deriving abstract]
+  type writeQueryOptions('data) = {
+    data: 'data,
+    query: documentNode,
+    [@bs.optional]
+    variables: Js.Json.t,
+  };
+
+  [@bs.send]
+  external readQuery: (t, readQueryOptions) => Js.Nullable.t('data) =
+    "readQuery";
+  [@bs.send]
+  external writeQuery: (t, writeQueryOptions('data)) => unit = "writeData";
+};
 
 type apolloErrorJs = {
   .
@@ -115,6 +139,12 @@ type mutationFunctionOptions('data, 'variables) = {
   "optimisticResponse": Js.Undefined.t('variables => 'data),
 };
 
+type executionResultJs = {
+  .
+  "data": Js.Undefined.t(Js.Json.t),
+  "errors": Js.Undefined.t(array(graphqlError)),
+};
+
 type mutationHookOptions;
 [@bs.obj]
 external mutationHookOptions:
@@ -122,16 +152,11 @@ external mutationHookOptions:
     ~mutation: documentNode=?,
     ~variables: Js.Json.t=?,
     ~errorPolicy: errorPolicy=?,
+    ~update: (DataProxy.t, executionResultJs) => unit=?,
     unit
   ) =>
   mutationHookOptions =
   "";
-
-type executionResultJs = {
-  .
-  "data": Js.Undefined.t(Js.Json.t),
-  "errors": Js.Undefined.t(array(graphqlError)),
-};
 
 type mutationResultJs('data) = {
   .
