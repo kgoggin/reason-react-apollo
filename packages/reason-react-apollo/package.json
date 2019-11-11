@@ -2,9 +2,16 @@
   "name": "reason-react-apollo",
   "version": "1.2.0-alpha.0",
   "dependencies": {
+    "reason-future": "^2.5.0"
+  },
+  "devDependencies": {
+    "bs-platform": "^5.0.6",
+    "reason-react": "^0.7.0"
+  },
+  "peerDependencies": {
     "@apollo/react-hooks": "^3.0.0",
     "bs-platform": "^5.0.6",
-    "reason-future": "^2.5.0",
+    "apollo-boost": "0.4.4",
     "reason-react": "^0.7.0"
   },
   "scripts": {
