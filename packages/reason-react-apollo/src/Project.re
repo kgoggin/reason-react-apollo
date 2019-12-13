@@ -228,7 +228,7 @@ module Make = (Config: ProjectConfig) => {
     let readQuery = (cache: DataProxy.t, ~variables: option(variables)=?, ()) => {
       cache
       ->DataProxy.readQuery(
-          DataProxy.readQueryOptions(
+          queryConfig(
             ~query,
             ~variables=?variables->Belt.Option.map(QueryConfig.parse),
             (),
@@ -254,6 +254,12 @@ module Make = (Config: ProjectConfig) => {
         ),
       );
     };
+
+    let queryConfig = (~variables: option(variables)=?, ()) => queryConfig(
+      ~query,
+      ~variables=?variables->Belt.Option.map(QueryConfig.parse),
+      ()
+    );
   };
 
   module MakeMutation = (MutationConfig: MutationConfig) => {
@@ -264,6 +270,8 @@ module Make = (Config: ProjectConfig) => {
           ~mutation as overrideMutation: option(documentNode)=?,
           ~variables: option(MutationConfig.variables)=?,
           ~update: option((DataProxy.t, executionResult) => unit)=?,
+          ~refetchQueries: option(array(queryConfig))=?,
+          ~awaitRefetchQueries: option(bool)=?,
           (),
         ) => {
       let updateJs =
@@ -293,6 +301,8 @@ module Make = (Config: ProjectConfig) => {
             variables->Belt.Option.map(MutationConfig.parse);
           },
           ~update=?updateJs,
+          ~refetchQueries=?refetchQueries,
+          ~awaitRefetchQueries=?awaitRefetchQueries,
           (),
         );
       let (mutateJs, responseJs) =

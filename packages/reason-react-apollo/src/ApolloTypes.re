@@ -9,15 +9,17 @@ type networkStatus;
 
 type graphqlError;
 
+[@bs.deriving abstract]
+type queryConfig = {
+  query: documentNode,
+  [@bs.optional]
+  variables: Js.Json.t,
+};
+
 module DataProxy = {
   type t;
 
-  [@bs.deriving abstract]
-  type readQueryOptions = {
-    query: documentNode,
-    [@bs.optional]
-    variables: Js.Json.t,
-  };
+  type readQueryOptions = queryConfig;
 
   [@bs.deriving abstract]
   type writeQueryOptions('data) = {
@@ -153,6 +155,8 @@ external mutationHookOptions:
     ~variables: Js.Json.t=?,
     ~errorPolicy: errorPolicy=?,
     ~update: (DataProxy.t, executionResultJs) => unit=?,
+    ~refetchQueries: array(queryConfig)=?,
+    ~awaitRefetchQueries: bool=?,
     unit
   ) =>
   mutationHookOptions =
