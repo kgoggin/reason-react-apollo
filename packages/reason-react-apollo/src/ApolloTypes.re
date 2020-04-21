@@ -1,5 +1,4 @@
 type documentNode;
-type watchQueryFetchPolicy;
 type errorPolicy;
 type apolloClient;
 type apolloLink;
@@ -8,6 +7,36 @@ type data = Js.Json.t;
 type networkStatus;
 
 type graphqlError;
+
+module WatchQueryFetchPolicy: {
+  type t = pri string;
+  [@bs.inline "cache-first"]
+  let cacheFirst: t;
+  [@bs.inline "network-only"]
+  let networkOnly: t;
+  [@bs.inline "cache-only"]
+  let cacheOnly: t;
+  [@bs.inline "no-cache"]
+  let noCache: t;
+  [@bs.inline "standby"]
+  let standby: t;
+  [@bs.inline "cache-and-network"]
+  let cacheAndNetwork: t;
+} = {
+  type t = string;
+  [@bs.inline]
+  let cacheFirst = "cache-first";
+  [@bs.inline]
+  let networkOnly = "network-only";
+  [@bs.inline]
+  let cacheOnly = "cache-only";
+  [@bs.inline]
+  let noCache = "no-cache";
+  [@bs.inline]
+  let standby = "standby";
+  [@bs.inline]
+  let cacheAndNetwork = "cache-and-network";
+};
 
 [@bs.deriving abstract]
 type queryConfig = {
@@ -54,7 +83,7 @@ type queryHookOptions = {
   [@bs.optional]
   variables: Js.Json.t,
   [@bs.optional]
-  fetchPolicy: watchQueryFetchPolicy,
+  fetchPolicy: WatchQueryFetchPolicy.t,
   [@bs.optional]
   errorPolicy,
   [@bs.optional]
@@ -86,7 +115,7 @@ type lazyQueryHookOptions = {
   [@bs.optional]
   variables: Js.Json.t,
   [@bs.optional]
-  fetchPolicy: watchQueryFetchPolicy,
+  fetchPolicy: WatchQueryFetchPolicy.t,
   [@bs.optional]
   errorPolicy,
   [@bs.optional]

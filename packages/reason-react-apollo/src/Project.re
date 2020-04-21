@@ -97,7 +97,7 @@ module Make = (Config: ProjectConfig) => {
           ~displayName: option(string)=?,
           ~skip: option(bool)=?,
           ~variables: option(QueryConfig.variables)=?,
-          ~fetchPolicy: option(watchQueryFetchPolicy)=?,
+          ~fetchPolicy: option(WatchQueryFetchPolicy.t)=?,
           ~errorPolicy: option(errorPolicy)=?,
           ~pollInterval: option(int)=?,
           ~client: option(apolloClient)=?,
@@ -159,7 +159,7 @@ module Make = (Config: ProjectConfig) => {
           ~query as overrideQuery: option(documentNode)=?,
           ~displayName: option(string)=?,
           ~variables: option(QueryConfig.variables)=?,
-          ~fetchPolicy: option(watchQueryFetchPolicy)=?,
+          ~fetchPolicy: option(WatchQueryFetchPolicy.t)=?,
           ~errorPolicy: option(errorPolicy)=?,
           ~pollInterval: option(int)=?,
           ~client: option(apolloClient)=?,
@@ -255,11 +255,12 @@ module Make = (Config: ProjectConfig) => {
       );
     };
 
-    let queryConfig = (~variables: option(variables)=?, ()) => queryConfig(
-      ~query,
-      ~variables=?variables->Belt.Option.map(QueryConfig.parse),
-      ()
-    );
+    let queryConfig = (~variables: option(variables)=?, ()) =>
+      queryConfig(
+        ~query,
+        ~variables=?variables->Belt.Option.map(QueryConfig.parse),
+        (),
+      );
   };
 
   module MakeMutation = (MutationConfig: MutationConfig) => {
@@ -301,8 +302,8 @@ module Make = (Config: ProjectConfig) => {
             variables->Belt.Option.map(MutationConfig.parse);
           },
           ~update=?updateJs,
-          ~refetchQueries=?refetchQueries,
-          ~awaitRefetchQueries=?awaitRefetchQueries,
+          ~refetchQueries?,
+          ~awaitRefetchQueries?,
           (),
         );
       let (mutateJs, responseJs) =
