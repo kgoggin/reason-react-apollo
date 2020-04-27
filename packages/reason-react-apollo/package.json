@@ -1,6 +1,6 @@
 {
   "name": "reason-react-apollo",
-  "version": "1.2.0-alpha.3",
+  "version": "1.2.0-alpha.4",
   "dependencies": {
     "reason-future": "^2.5.0"
   },
