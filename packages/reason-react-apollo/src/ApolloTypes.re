@@ -159,7 +159,9 @@ type queryResultJs('data, 'variables) = {
   "error": Js.Undefined.t(apolloErrorJs),
   "variables": 'variables,
   "networkStatus": networkStatus,
-  "refetch": 'variables => Js.Promise.t(apolloQueryResultJs('data)),
+  [@bs.meth]
+  "refetch":
+    Js.Undefined.t(Js.Json.t) => Js.Promise.t(apolloQueryResultJs('data)),
   "startPolling": int => unit,
   "stopPolling": unit => unit,
 };

@@ -58,6 +58,9 @@ module Make = (Config: ProjectConfig) => {
     networkStatus,
     startPolling: int => unit,
     stopPolling: unit => unit,
+    refetch:
+      (~variables: 'variables=?, unit) =>
+      Future.t(Belt.Result.t(apolloQueryResult, apolloError)),
   };
 
   type executionResult = {
@@ -151,6 +154,32 @@ module Make = (Config: ProjectConfig) => {
         networkStatus: response##networkStatus,
         startPolling: response##startPolling,
         stopPolling: response##stopPolling,
+        refetch: (~variables=?, ()) => {
+          response##refetch(
+            variables
+            ->Belt.Option.map(QueryConfig.parse)
+            ->Js.Undefined.fromOption,
+          )
+          ->FutureJs.fromPromise(err => err->Obj.magic)
+          ->Future.mapOk(jsResponse =>
+              {
+                loading: jsResponse##loading,
+                data:
+                  jsResponse##data
+                  ->Js.Undefined.toOption
+                  ->Belt.Option.flatMap(mapEmptyObject)
+                  ->Belt.Option.map(Config.parseQuery),
+                errors:
+                  jsResponse##errors
+                  ->Js.Undefined.toOption
+                  ->Belt.Option.map(arr =>
+                      arr->Belt.Array.map(mapGraphQLError)
+                    ),
+                networkStatus: jsResponse##networkStatus,
+                stale: jsResponse##stale,
+              }
+            );
+        },
       };
     };
 
@@ -217,11 +246,38 @@ module Make = (Config: ProjectConfig) => {
             response##error
             ->Js.Undefined.toOption
             ->Belt.Option.map(mapApolloError),
-          variables: response##variables,
+          variables: response##variables->Obj.magic,
           networkStatus: response##networkStatus,
           startPolling: response##startPolling,
           stopPolling: response##stopPolling,
-        },
+          refetch: (~variables: option(QueryConfig.variables)=?, ()) => {
+            response##refetch(
+              variables
+              ->Belt.Option.map(QueryConfig.parse)
+              ->Js.Undefined.fromOption,
+            )
+            ->FutureJs.fromPromise(err => err->Obj.magic)
+            ->Future.mapOk(jsResponse =>
+                {
+                  loading: jsResponse##loading,
+                  data:
+                    jsResponse##data
+                    ->Js.Undefined.toOption
+                    ->Belt.Option.flatMap(mapEmptyObject)
+                    ->Belt.Option.map(Config.parseQuery),
+                  errors:
+                    jsResponse##errors
+                    ->Js.Undefined.toOption
+                    ->Belt.Option.map(arr =>
+                        arr->Belt.Array.map(mapGraphQLError)
+                      ),
+                  networkStatus: jsResponse##networkStatus,
+                  stale: jsResponse##stale,
+                }
+              );
+          },
+        }:
+          queryResult(QueryConfig.variables),
       );
     };
 
