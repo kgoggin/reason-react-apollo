@@ -188,6 +188,7 @@ external mutationHookOptions:
     ~update: (DataProxy.t, executionResultJs) => unit=?,
     ~refetchQueries: array(queryConfig)=?,
     ~awaitRefetchQueries: bool=?,
+    ~optimisticResponse: Js.Json.t=?,
     unit
   ) =>
   mutationHookOptions =
