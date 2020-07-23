@@ -329,7 +329,7 @@ module Make = (Config: ProjectConfig) => {
           ~update: option((DataProxy.t, executionResult) => unit)=?,
           ~refetchQueries: option(array(queryConfig))=?,
           ~awaitRefetchQueries: option(bool)=?,
-          ~optimisticResponse: option(Js.Json.t),
+          ~optimisticResponse: option(Js.Json.t)=?,
           (),
         ) => {
       let updateJs =
